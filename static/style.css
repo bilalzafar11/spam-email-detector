@@ -1,0 +1,151 @@
+/* ========================== */
+/* Google Font Setup & Global */
+/* ========================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif; /* Inter as primary, fallback to Arial/sans-serif */
+  background: #e0e7ff; /* soft light blue */
+  color: #1e293b;
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* ========================== */
+/* Container */
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* ========================== */
+/* Header */
+.site-header {
+  background: linear-gradient(135deg, #1e3a8a, #1e40af); /* dark blue gradient */
+  color: #fff;
+  padding: 3rem 1rem;
+  text-align: center;
+  border-radius: 0 0 14px 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.site-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.site-header .subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-top: 0.75rem;
+}
+
+/* ========================== */
+/* Form Section */
+.form-section {
+  margin: 3rem 0;
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.email-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1e3a8a;
+}
+
+.email-form textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  resize: vertical;
+  margin-bottom: 1.2rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.email-form textarea:focus {
+  border-color: #1e40af;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.25);
+}
+
+/* ========================== */
+/* Button */
+.btn-primary {
+  background: #1e40af; /* dark blue */
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #1e3a8a;
+  box-shadow: 0 6px 15px rgba(30, 64, 175, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* ========================== */
+/* Result Section */
+.result {
+  margin-top: 2rem;
+  padding: 1.75rem;
+  background: #e0e7ff; /* subtle light blue background */
+  border-left: 6px solid #1e40af;
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.result h3 {
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.result p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ========================== */
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 1.75rem 0;
+  font-size: 0.95rem;
+  color: #334155;
+  border-top: 1px solid #cbd5e1;
+  margin-top: 3rem;
+  font-weight: 400;
+  background: #f0f4ff;
+}
+
+/* ========================== */
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}

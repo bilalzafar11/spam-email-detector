@@ -19,11 +19,11 @@ if os.path.exists(MODEL_PATH) and os.path.exists(VECTORIZER_PATH):
     try:
         model = joblib.load(MODEL_PATH)
         vectorizer = joblib.load(VECTORIZER_PATH)
-        print("Model & Vectorizer loaded successfully!")
+        print("✅ Model & Vectorizer loaded successfully!")
     except Exception as e:
-        print(f"Error loading model/vectorizer: {e}")
+        print(f"❌ Error loading model/vectorizer: {e}")
 else:
-    print("Model or Vectorizer file not found!")
+    print("⚠️ Model or Vectorizer file not found!")
 
 # ==========================
 # Home Route
@@ -38,9 +38,9 @@ def index():
         email_text = request.form.get("email", "").strip()
 
         if not email_text:
-            flash("Please enter email text!", "warning")
+            flash("⚠️ Please enter email text!", "warning")
         elif not model or not vectorizer:
-            flash("Model not loaded properly. Please check files.", "danger")
+            flash("❌ Model not loaded properly. Please check files.", "danger")
         else:
             try:
                 # Transform input text
@@ -51,11 +51,11 @@ def index():
                 proba = model.predict_proba(email_vector)[0]
 
                 # Map prediction to readable format
-                prediction = "Spam" if result == 1 else "Not Spam"
+                prediction = "🚫 Spam" if result == 1 else "✅ Not Spam"
                 probability = f"{max(proba) * 100:.2f}% confidence"
 
             except Exception as e:
-                flash(f"Error during prediction: {e}", "danger")
+                flash(f"❌ Error during prediction: {e}", "danger")
 
     return render_template(
         "index.html",
@@ -65,7 +65,9 @@ def index():
     )
 
 # ==========================
-# Run Flask App
+# Run Flask App (Replit Ready)
 # ==========================
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Replit provides the PORT via environment variables
+    port = int(os.environ.get("PORT", 3000))
+    app.run(host="0.0.0.0", port=port, debug=True)

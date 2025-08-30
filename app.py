@@ -1,3 +1,6 @@
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
 from flask import Flask, render_template, request, flash
 import joblib
 import os
@@ -23,7 +26,7 @@ if os.path.exists(MODEL_PATH) and os.path.exists(VECTORIZER_PATH):
     except Exception as e:
         print(f"❌ Error loading model/vectorizer: {e}")
 else:
-    print("⚠️ Model or Vectorizer file not found!")
+    print("❌ Model or Vectorizer file not found!")
 
 # ==========================
 # Home Route
@@ -32,6 +35,8 @@ else:
 def index():
     prediction = None
     probability = None
+    spam_confidence = None
+    notspam_confidence = None
     email_text = None
 
     if request.method == "POST":
@@ -51,8 +56,12 @@ def index():
                 proba = model.predict_proba(email_vector)[0]
 
                 # Map prediction to readable format
-                prediction = "🚫 Spam" if result == 1 else "✅ Not Spam"
-                probability = f"{max(proba) * 100:.2f}% confidence"
+                prediction = "Spam" if result == 1 else "Not Spam"
+
+                # Confidence values
+                spam_confidence = f"{proba[1] * 100:.2f}%"
+                notspam_confidence = f"{proba[0] * 100:.2f}%"
+                probability = f"{max(proba) * 100:.2f}%"
 
             except Exception as e:
                 flash(f"❌ Error during prediction: {e}", "danger")
@@ -61,13 +70,13 @@ def index():
         "index.html",
         prediction=prediction,
         probability=probability,
+        spam_confidence=spam_confidence,
+        notspam_confidence=notspam_confidence,
         email_text=email_text
     )
 
 # ==========================
-# Run Flask App (Replit Ready)
+# Run Flask App
 # ==========================
 if __name__ == "__main__":
-    # Replit provides the PORT via environment variables
-    port = int(os.environ.get("PORT", 3000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(debug=True)

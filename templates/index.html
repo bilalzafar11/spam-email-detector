@@ -1,31 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spam Email Detector</title>
+  <!-- Charset & Viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title -->
+  <title>Spam Email Detector | Muhammad Bilal Zafar</title>
+
+  <!-- Basic SEO -->
+  <meta name="description" content="Spam Email Detector - A simple ML-based tool by Muhammad Bilal Zafar to detect spam or safe emails.">
+  <meta name="author" content="Muhammad Bilal Zafar">
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- External CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
   <!-- Favicon -->
-  <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png" />
+  <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
 </head>
 
 <body>
+
   <!-- HEADER -->
   <header class="site-header">
-    <div class="container">
-      <h1>Spam Email Detector</h1>
-      <p class="subtitle">Analyze email content using Machine Learning to detect spam instantly.</p>
+    <div class="container header-container">
+      <div class="header-top">
+        <h1>Spam Email Detector</h1>
+        <p class="subtitle">Analyze email content using Machine Learning to detect spam instantly.</p>
+      </div>
     </div>
   </header>
 
   <!-- MAIN CONTENT -->
-  <main>
+  <main id="home">
+
+    <!-- Form Section -->
     <section class="form-section">
       <div class="container">
 
@@ -44,30 +54,75 @@
         <form method="post" action="/" class="email-form">
           <label for="email">Enter Email Content</label>
           <textarea id="email" name="email" placeholder="Paste your email text here..." required>{{ email_text or '' }}</textarea>
-
           <button type="submit" class="btn-primary">Check Email</button>
         </form>
 
         <!-- Prediction Result -->
         {% if prediction %}
-        <div class="result {% if 'Spam' in prediction %} spam-result {% else %} safe-result {% endif %}">
-          <h3>Analysis Result</h3>
-          <p><strong>{{ prediction }}</strong></p>
-          {% if probability %}
-            <p class="confidence">Confidence: <em>{{ probability }}</em></p>
-          {% endif %}
-        </div>
-        {% endif %}
+          <div class="result-card {% if prediction == 'Spam' %} spam-result {% else %} safe-result {% endif %}">
+            
+            <!-- Title -->
+            <h3>📊 Email Analysis Result</h3>
+            
+            <!-- Prediction -->
+            <p class="prediction-text">
+              <strong>Prediction:</strong> 
+              <span class="{% if prediction == 'Spam' %} highlight-spam {% else %} highlight-safe {% endif %}">
+                {% if prediction == 'Spam' %}
+                  ❌ Spam
+                {% else %}
+                  ✅ Ham (Not Spam)
+                {% endif %}
+              </span>
+            </p>
 
+            <!-- Confidence Section -->
+            <div class="confidence-section">
+              <p><strong>Spam Confidence:</strong> {{ spam_confidence }}</p>
+              <p><strong>Ham (Not Spam) Confidence:</strong> {{ notspam_confidence }}</p>
+              <hr>
+              <p class="final-confidence">
+                🔎 <em>Overall Confidence:</em> <strong>{{ probability }}</strong>
+              </p>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <h2>About This Tool</h2>
+        <p>
+          This Spam Email Detector uses smart Machine Learning models to check your email content.  
+          It quickly tells you whether the email is <strong>Spam</strong> or <strong>Safe</strong>.  
+          Just paste your email below and see the result instantly!
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p>
+          If you have any questions or feedback, reach out via email at 
+          <a href="mailto:bilalzafar7350@gmail.com">bilalzafar7350@gmail.com</a>
+        </p>
       </div>
     </section>
   </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 Spam Detector | Built with <span class="highlight">Flask</span> & Machine Learning</p>
+    <div class="container footer-container">
+      <div class="footer-content">
+        <p>&copy; 2025 Spam Email Detector</p>
+        <p>Built with <span class="highlight">Flask</span> & Machine Learning</p>
+      </div>
     </div>
   </footer>
+
 </body>
 </html>

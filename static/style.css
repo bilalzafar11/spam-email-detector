@@ -427,6 +427,12 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  .final-confidence {
+    font-size: 1rem; /* slightly smaller on mobile */
+    gap: 4px;       /* reduce spacing for compact look */
+  }
+}
 
 /* ========================== */
 /* Footer */
@@ -481,6 +487,10 @@ body {
   .result { padding: 2rem; }
   .about-section h2 { font-size: 2rem; }
   .about-section p { font-size: 1.05rem; }
+  .final-confidence {
+    font-size: 1rem; 
+    gap: 4px;         
+  }
 }
 
 @media (max-width: 480px) {

@@ -28,6 +28,27 @@ if os.path.exists(MODEL_PATH) and os.path.exists(VECTORIZER_PATH):
 else:
     print("❌ Model or Vectorizer file not found!")
 
+
+# ==========================
+# Custom Rule-Based Filter
+# ==========================
+def custom_filter(email_text, model_prediction):
+    trusted_keywords = [
+        "meezan bank", "hbl", "mcb", "ubl", "askari bank",
+        "standard chartered", "linkedin", "leetcode", "payoneer"
+    ]
+
+    text_lower = email_text.lower()
+
+    # Agar trusted keyword match kare → forcefully "Not Spam"
+    for keyword in trusted_keywords:
+        if keyword in text_lower:
+            return "Not Spam"
+
+    # Default → jo model ne bola
+    return model_prediction
+
+
 # ==========================
 # Home Route
 # ==========================
@@ -51,12 +72,15 @@ def index():
                 # Transform input text
                 email_vector = vectorizer.transform([email_text])
 
-                # Make prediction
+                # Model Prediction
                 result = model.predict(email_vector)[0]
                 proba = model.predict_proba(email_vector)[0]
 
                 # Map prediction to readable format
-                prediction = "Spam" if result == 1 else "Not Spam"
+                raw_prediction = "Spam" if result == 1 else "Not Spam"
+
+                # Apply custom filter
+                prediction = custom_filter(email_text, raw_prediction)
 
                 # Confidence values
                 spam_confidence = f"{proba[1] * 100:.2f}%"
@@ -74,6 +98,7 @@ def index():
         notspam_confidence=notspam_confidence,
         email_text=email_text
     )
+
 
 # ==========================
 # Run Flask App

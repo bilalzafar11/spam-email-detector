@@ -21,14 +21,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r static/requirements.txt   # Path to your requirements.txt
+          pip install -r static/requirements.txt   # Only once
 
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: |
-            .       # Upload current directory
+            .       # Upload all files
             !venv/  # Exclude virtual environment
 
   deploy:

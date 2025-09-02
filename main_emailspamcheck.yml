@@ -28,8 +28,8 @@ jobs:
         with:
           name: python-app
           path: |
-            .       # Upload all files except venv
-            !venv/
+            .       # Upload all files
+            !venv/  # Exclude virtual environment
 
   deploy:
     runs-on: ubuntu-latest

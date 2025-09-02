@@ -28,7 +28,7 @@ jobs:
         with:
           name: python-app
           path: |
-            .       # Upload all files
+            .       # Upload all files except venv
             !venv/  # Exclude virtual environment
 
   deploy:

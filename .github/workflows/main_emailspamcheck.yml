@@ -31,7 +31,7 @@ jobs:
         with:
           name: python-app
           path: |
-            ./
+            ./ 
             !venv/**
             !**/__pycache__/**
             !.git/**
@@ -53,9 +53,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9EA6A20E7001470CAE946AF95170B34A }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C22D9C788EB24679A24C873312F02008 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D45F5F85FD9C47C88D3640B2B19312C8 }}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3

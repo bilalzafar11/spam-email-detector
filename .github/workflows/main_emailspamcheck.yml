@@ -31,8 +31,10 @@ jobs:
         with:
           name: python-app
           path: |
-            .       # Upload all files
-            !venv/  # Exclude virtual environment
+            ./**           # Upload all files
+            !venv/**       # Exclude virtual environment
+            !**/__pycache__/
+            !.git/**
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,6 +48,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
+          path: .   # Download into current working directory
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -59,3 +62,4 @@ jobs:
         with:
           app-name: 'emailspamcheck'
           slot-name: 'Production'
+          package: .
